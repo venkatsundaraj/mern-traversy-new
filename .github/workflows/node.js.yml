@@ -33,7 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Deploy to Droplet
-      uses: appleboy/ssh-action@main
+      uses: appleboy/ssh-action@master
       with:
         script: |
           # Replace these commands with your actual deployment steps
