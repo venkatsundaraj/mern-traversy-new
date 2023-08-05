@@ -32,6 +32,8 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+    - name: Add Droplet Host Key to Known Hosts
+      run: ssh-keyscan ${{ secrets.DROPLET_IP }} >> ~/.ssh/known_hosts
     - name: Deploy to Droplet
       uses: appleboy/ssh-action@master
       with:
