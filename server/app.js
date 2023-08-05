@@ -22,7 +22,7 @@ connectDB()
 app.use(goalRouter)
 app.use('/admin',userRouter)
 
-app.use('/hello',(req,res,next)=>{
+app.get('api/hello',(req,res,next)=>{
     res.status(200).json({message:'Good to see you'})
 })
 
