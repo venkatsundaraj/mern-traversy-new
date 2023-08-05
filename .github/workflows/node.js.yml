@@ -28,3 +28,14 @@ jobs:
     - run: cd frontend
     - run: npm i
     - run: npm run build --if-present
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Deploy to Droplet
+      uses: appleboy/ssh-action@master
+      with:
+        script: |
+          # Replace these commands with your actual deployment steps
+          scp -r frontend/build venkat@162.243.187.23:/var/www/sites/_work/mern-traversy-new/mern-traversy-new/frontend
+          ssh venkat@162.243.187.23 "cd /var/www/sites/_work/mern-traversy-new/mern-traversy-new && pm2 restart 0"
