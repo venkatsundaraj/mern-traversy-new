@@ -40,5 +40,5 @@ jobs:
         key: ${{ secrets.DROPLET_SSH_PRIVATE_KEY }}
         script: |
           # Replace these commands with your actual deployment steps
-          scp -r frontend/build venkat@162.243.187.23:/var/www/sites/_work/mern-traversy-new/mern-traversy-new/frontend
+          scp -r frontend/build venkat@162.243.187.23:/var/www/sites/_work/mern-traversy-new/mern-traversy-new
           ssh venkat@162.243.187.23 "cd /var/www/sites/_work/mern-traversy-new/mern-traversy-new && pm2 restart 0"
