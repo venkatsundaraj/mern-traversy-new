@@ -10,7 +10,7 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     strategy:
       matrix:
@@ -28,23 +28,5 @@ jobs:
     - run: cd frontend
     - run: npm i
     - run: npm run build --if-present
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-    - name: Create SSH Directory
-      run: mkdir -p ~/.ssh
-    - name: Add Droplet Host Key to Known Hosts
-      run: ssh-keyscan ${{ secrets.DROPLET_IP }} >> $HOME/.ssh/known_hosts
-    - name: Set Permissions for SSH Directory and Files
-      run: chmod 700 ~/.ssh && chmod 644 ~/.ssh/known_hosts
-    - name: Deploy to Droplet
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.DROPLET_IP }}
-        username: ${{ secrets.DROPLET_USERNAME }}
-        key: ${{ secrets.DROPLET_SSH_PRIVATE_KEY }}
-        script: |
-          # Replace these commands with your actual deployment steps
-          scp -r frontend/build venkat@162.243.187.23:/var/www/sites/_work/mern-traversy-new/mern-traversy-new
-          ssh venkat@162.243.187.23 "cd /var/www/sites/_work/mern-traversy-new/mern-traversy-new && pm2 restart 0"
+    - run: npm run build 
+  
